@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coding ni Martin Christopher Cordero - Gwapo Gwapo | Potyong Index</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: {
+              950: '#070709',
+              900: '#0c0c0e',
+              800: '#141418',
+              700: '#1e1e24',
+              600: '#2a2a32'
+            },
+            emeraldGlow: {
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              900: '#064e3b'
+            }
+          },
+          keyframes: {
+            laserScan: {
+              '0%, 100%': { top: '0%' },
+              '50%': { top: '100%' }
+            },
+            subtlePulse: {
+              '0%, 100%': { opacity: '0.3' },
+              '50%': { opacity: '0.7' }
+            }
+          },
+          animation: {
+            laser: 'laserScan 2.2s ease-in-out infinite',
+            pulseSlow: 'subtlePulse 3s ease-in-out infinite'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #070709;
+      color: #f4f4f5;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+      height: 320px;
+      max-height: 380px;
+    }
+
+    @media (min-width: 768px) {
+      .chart-container {
+        height: 360px;
+      }
+    }
+
+    .emerald-glow-text {
+      background: linear-gradient(135deg, #a7f3d0 0%, #34d399 50%, #059669 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .glass-card {
+      background: rgba(20, 20, 24, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .laser-line {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #34d399, transparent);
+      box-shadow: 0 0 12px #34d399;
+    }
+  </style>
+
+  <!-- Chosen Palette: Dark Minimalist Obsidian & Neon Emerald (`#070709`, `#141418`, `#34d399`, `#059669`, `#f4f4f5`) -->
+
+  <!-- Application Structure Plan:
+      1. Minimalist Navigation: Branding celebrating "Coding ni Martin Christopher Cordero - Gwapo Gwapo", section anchors, and interactive Aura counter button.
+      2. Hero Section: Editorial headline with "Coding ni Martin Christopher Cordero Gwapo Gwapo", live metric cards, and primary action triggers.
+      3. Biometric Diagnostic HUD: AI scanner custom-tuned for Martin's facial symmetry vectors and jawline precision.
+      4. Interactive Photo Gallery ("Vault of Perfection"): Filterable showcase with detailed inspector modals and humorous annotations.
+      5. Empirical Aesthetic Analytics Hub: Chart.js Radar & Bar charts analyzing Martin's metrics vs standard baseline human specs.
+      6. Potyong Affirmation Engine: Personalized praise generator incorporating "mga potyong!!" with copy & confetti triggers.
+      7. Minimalist FAQ Accordion: Answering fundamental questions regarding Martin's legendary charm and programming mastery. -->
+
+  <!-- Visualization & Content Choices:
+      1. Facial Biometrics -> Canvas/HTML scanner animation with live status indicators.
+      2. Gallery -> Filterable grid + Modal preview popups with high-res editorial photography.
+      3. Radar Chart -> Chart.js Radar comparing Martin Cordero against standard human averages.
+      4. Aura Bar Chart -> Chart.js Bar Chart measuring daily charisma output by time of day.
+      5. Affirmation Engine -> Random phrase generator with interactive audio-visual feedback.
+      Confirming NO SVG graphics used. NO Mermaid JS used. -->
+
+  <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-emerald-500 selection:text-black">
+
+<!-- Sleek Minimal Header -->
+<header class="bg-obsidian-950/80 backdrop-blur-md border-b border-obsidian-700/50 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 rounded-lg bg-emeraldGlow-500/10 border border-emeraldGlow-500/30 flex items-center justify-center text-emeraldGlow-400 font-mono font-bold text-sm">
+          M
+        </div>
+        <div>
+                        <span class="font-bold text-sm sm:text-base tracking-tight text-white flex items-center gap-2">
+                            Coding ni Martin Christopher Cordero
+                            <span class="text-[10px] bg-emeraldGlow-500/10 text-emeraldGlow-400 border border-emeraldGlow-500/20 px-2 py-0.5 rounded font-mono uppercase">Gwapo Gwapo</span>
+                        </span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex space-x-8 text-xs font-mono uppercase tracking-widest text-zinc-400">
+        <a href="#scanner" class="hover:text-emeraldGlow-400 transition">Biometrics</a>
+        <a href="#gallery" class="hover:text-emeraldGlow-400 transition">Gallery</a>
+        <a href="#analytics" class="hover:text-emeraldGlow-400 transition">Analytics</a>
+        <a href="#affirmations" class="hover:text-emeraldGlow-400 transition">Affirmations</a>
+        <a href="#faq" class="hover:text-emeraldGlow-400 transition">FAQ</a>
+      </nav>
+
+      <div class="flex items-center space-x-3">
+        <button onclick="triggerAdmiration()" class="bg-emeraldGlow-500/10 hover:bg-emeraldGlow-500/20 text-emeraldGlow-400 border border-emeraldGlow-500/30 text-xs px-3.5 py-1.5 rounded-full transition font-mono flex items-center gap-2">
+          <i class="fa-solid fa-fire text-emeraldGlow-400"></i>
+          <span>Aura Points: <strong id="auraCount">999,999+</strong></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Workspace -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-20">
+
+  <!-- Hero Section: Editorial Dark Minimalist -->
+  <section class="relative glass-card rounded-3xl p-8 sm:p-14 text-center overflow-hidden border border-obsidian-700/60">
+    <div class="absolute -top-32 -left-32 w-80 h-80 bg-emeraldGlow-500/10 rounded-full blur-3xl animate-pulseSlow"></div>
+    <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-emeraldGlow-500/10 rounded-full blur-3xl animate-pulseSlow"></div>
+
+    <div class="max-w-3xl mx-auto space-y-6 relative z-10">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 bg-emeraldGlow-500/10 border border-emeraldGlow-500/30 text-emeraldGlow-400 rounded-full text-[11px] font-mono uppercase tracking-widest">
+        <i class="fa-solid fa-code text-xs"></i> Official Coding Project • Martin Christopher Cordero
+      </div>
+
+      <h1 class="text-3xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight font-sans">
+        Coding ni Martin Christopher Cordero <br>
+        <span class="emerald-glow-text">Gwapo Gwapo Edition</span>
+      </h1>
+
+      <p class="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light">
+        A dark minimalist digital archive engineered specifically to measure, quantify, and document the unmatched handsomeness and coding brilliance of Martin Christopher Cordero. Mga potyong!!
+      </p>
+
+      <!-- Live Metrics Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-obsidian-700/50 text-left font-mono">
+        <div class="bg-obsidian-900/60 p-4 rounded-xl border border-obsidian-700/40">
+          <div class="text-[10px] text-zinc-500 uppercase">Martin's Jawline</div>
+          <div id="statJaw" class="text-xl sm:text-2xl font-bold text-emeraldGlow-400 mt-1">100.0%</div>
+        </div>
+        <div class="bg-obsidian-900/60 p-4 rounded-xl border border-obsidian-700/40">
+          <div class="text-[10px] text-zinc-500 uppercase">Coding Skill</div>
+          <div id="statCode" class="text-xl sm:text-2xl font-bold text-emeraldGlow-400 mt-1">GOD-TIER</div>
+        </div>
+        <div class="bg-obsidian-900/60 p-4 rounded-xl border border-obsidian-700/40">
+          <div class="text-[10px] text-zinc-500 uppercase">Gwapo Index</div>
+          <div id="statGwapo" class="text-xl sm:text-2xl font-bold text-emeraldGlow-400 mt-1">MAX 10/10</div>
+        </div>
+        <div class="bg-obsidian-900/60 p-4 rounded-xl border border-obsidian-700/40">
+          <div class="text-[10px] text-zinc-500 uppercase">Potyong Power</div>
+          <div class="text-xl sm:text-2xl font-bold text-emeraldGlow-400 mt-1">UNLIMITED</div>
+        </div>
+      </div>
+
+      <div class="pt-4 flex flex-wrap justify-center gap-4">
+        <button onclick="scrollToSection('scanner')" class="bg-emeraldGlow-500 hover:bg-emeraldGlow-400 text-black font-semibold text-xs px-6 py-3 rounded-xl transition font-mono uppercase tracking-wider shadow-lg shadow-emeraldGlow-500/10 flex items-center gap-2">
+          <i class="fa-solid fa-expand text-sm"></i> Run Martin AI Scanner
+        </button>
+        <button onclick="generatePotyongAffirmation()" class="bg-obsidian-800 hover:bg-obsidian-700 text-zinc-200 border border-obsidian-700 font-semibold text-xs px-6 py-3 rounded-xl transition font-mono uppercase tracking-wider flex items-center gap-2">
+          <i class="fa-solid fa-sparkles text-emeraldGlow-400"></i> Mga Potyong Affirmations
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: BIOMETRIC SCANNER HUD -->
+  <section id="scanner" class="glass-card rounded-3xl p-6 sm:p-10 border border-obsidian-700/60 space-y-6">
+    <div class="flex flex-col sm:flex-row justify-between sm:items-end gap-4 border-b border-obsidian-700/50 pb-5">
+      <div>
+        <div class="text-xs font-mono text-emeraldGlow-400 uppercase tracking-widest flex items-center gap-2">
+          <i class="fa-solid fa-crosshairs"></i> Facial & Code Diagnostics
+        </div>
+        <h2 class="text-2xl font-bold text-white mt-1">Biometric Gwapo Scanner</h2>
+        <p class="text-xs text-zinc-400 mt-1">
+          Analyzing Martin Christopher Cordero's facial symmetry, gaze magnetism, and syntax precision.
+        </p>
+      </div>
+      <button id="scanBtn" onclick="runBiometricScan()" class="bg-emeraldGlow-500 hover:bg-emeraldGlow-400 text-black font-semibold font-mono text-xs px-5 py-2.5 rounded-xl transition shrink-0 flex items-center gap-2">
+        <i class="fa-solid fa-radar text-sm"></i> Execute Martin Scan
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+      <!-- Scanner Viewport Container -->
+      <div class="lg:col-span-1 bg-obsidian-950 rounded-2xl border border-obsidian-700/60 p-6 flex flex-col items-center justify-center relative overflow-hidden min-h-[300px]">
+        <div id="laserScanLine" class="laser-line top-0 hidden animate-laser"></div>
+
+        <div class="w-40 h-52 rounded-full border border-dashed border-emeraldGlow-500/40 flex flex-col items-center justify-center relative p-4 text-center bg-emeraldGlow-500/5">
+          <i id="scanAvatarIcon" class="fa-solid fa-user-astronaut text-6xl text-emeraldGlow-400/80 mb-2 transition-all duration-300"></i>
+          <span id="scanStatus" class="text-[10px] font-mono text-emeraldGlow-400 tracking-widest uppercase">CORDERO ID: ACTIVE</span>
+        </div>
+
+        <div class="absolute top-3 left-3 text-[10px] font-mono text-zinc-600">ACCURACY: 100%</div>
+        <div class="absolute top-3 right-3 text-[10px] font-mono text-zinc-600">FPS: 60</div>
+        <div id="timestampVal" class="absolute bottom-3 left-3 text-[10px] font-mono text-emeraldGlow-500/70">GWAPO LEVEL: MAXIMUM</div>
+      </div>
+
+      <!-- Diagnostic Readings Breakdown -->
+      <div class="lg:col-span-2 space-y-4 font-mono">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-obsidian-900/60 p-4 rounded-xl border border-obsidian-700/40 space-y-2">
+            <div class="flex justify-between text-xs">
+              <span class="text-zinc-400">Jawline Sharpness</span>
+              <span id="jawVal" class="text-emeraldGlow-400 font-bold">100.0%</span>
+            </div>
+            <div class="w-full bg-obsidian-950 h-1.5 rounded-full overflow-hidden">
+              <div id="jawBar" class="bg-emeraldGlow-400 h-full rounded-full transition-all duration-1000" style="width: 100%"></div>
+            </div>
+            <p class="text-[10px] text-zinc-500 font-sans">Sharper than Martin's cleanest algorithms.</p>
+          </div>
+
+          <div class="bg-obsidian-900/60 p-4 rounded-xl border border-obsidian-700/40 space-y-2">
+            <div class="flex justify-between text-xs">
+              <span class="text-zinc-400">Eye Magnetism</span>
+              <span id="eyeVal" class="text-emeraldGlow-400 font-bold">100.0%</span>
+            </div>
+            <div class="w-full bg-obsidian-950 h-1.5 rounded-full overflow-hidden">
+              <div id="eyeBar" class="bg-emeraldGlow-400 h-full rounded-full transition-all duration-1000" style="width: 100%"></div>
+            </div>
+            <p class="text-[10px] text-zinc-500 font-sans">Direct contact causes immediate code refactoring.</p>
+          </div>
+
+          <div class="bg-obsidian-900/60 p-4 rounded-xl border border-obsidian-700/40 space-y-2">
+            <div class="flex justify-between text-xs">
+              <span class="text-zinc-400">Coding Efficiency</span>
+              <span id="photoVal" class="text-emeraldGlow-400 font-bold">99.9%</span>
+            </div>
+            <div class="w-full bg-obsidian-950 h-1.5 rounded-full overflow-hidden">
+              <div id="photoBar" class="bg-emeraldGlow-400 h-full rounded-full transition-all duration-1000" style="width: 99.9%"></div>
+            </div>
+            <p class="text-[10px] text-zinc-500 font-sans">Compiles without warnings on the first try.</p>
+          </div>
+
+          <div class="bg-obsidian-900/60 p-4 rounded-xl border border-obsidian-700/40 space-y-2">
+            <div class="flex justify-between text-xs">
+              <span class="text-zinc-400">Mga Potyong Aura</span>
+              <span id="vibeVal" class="text-emeraldGlow-400 font-bold">100.0%</span>
+            </div>
+            <div class="w-full bg-obsidian-950 h-1.5 rounded-full overflow-hidden">
+              <div id="vibeBar" class="bg-emeraldGlow-400 h-full rounded-full transition-all duration-1000" style="width: 100%"></div>
+            </div>
+            <p class="text-[10px] text-zinc-500 font-sans">Radiates unmatched confidence across all servers.</p>
+          </div>
+        </div>
+
+        <!-- Scan Summary Box -->
+        <div class="p-4 bg-emeraldGlow-500/10 border border-emeraldGlow-500/30 rounded-xl text-xs text-emeraldGlow-300 flex items-start gap-3">
+          <i class="fa-solid fa-circle-check text-emeraldGlow-400 text-base shrink-0 mt-0.5"></i>
+          <div>
+            <strong class="font-bold block mb-0.5">Martin Christopher Cordero Verdict: Gwapo Gwapo Certified</strong>
+            <span id="verdictText">Biometric sequence complete. Martin's aesthetic and programming parameters remain unmatched in history. Mga potyong!!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: INTERACTIVE FILTERABLE PHOTO GALLERY -->
+  <section id="gallery" class="glass-card rounded-3xl p-6 sm:p-10 border border-obsidian-700/60 space-y-6">
+    <div class="flex flex-col sm:flex-row justify-between sm:items-end gap-4 border-b border-obsidian-700/50 pb-5">
+      <div>
+        <div class="text-xs font-mono text-emeraldGlow-400 uppercase tracking-widest flex items-center gap-2">
+          <i class="fa-solid fa-camera"></i> Visual Records Archive
+        </div>
+        <h2 class="text-2xl font-bold text-white mt-1">Vault of Gwapo Gwapo</h2>
+        <p class="text-xs text-zinc-400 mt-1">
+          High-definition portraits documenting Martin Christopher Cordero's peak angles.
+        </p>
+      </div>
+
+      <!-- Gallery Filters -->
+      <div class="flex flex-wrap gap-2 font-mono text-xs">
+        <button onclick="filterGallery('all')" class="filter-btn active bg-emeraldGlow-500 text-black px-3 py-1.5 rounded-lg font-bold transition">All</button>
+        <button onclick="filterGallery('editorial')" class="filter-btn bg-obsidian-800 text-zinc-400 hover:text-white px-3 py-1.5 rounded-lg transition">Developer Mode</button>
+        <button onclick="filterGallery('candid')" class="filter-btn bg-obsidian-800 text-zinc-400 hover:text-white px-3 py-1.5 rounded-lg transition">Candid</button>
+        <button onclick="filterGallery('redcarpet')" class="filter-btn bg-obsidian-800 text-zinc-400 hover:text-white px-3 py-1.5 rounded-lg transition">Main Character</button>
+      </div>
+    </div>
+
+    <!-- Photo Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
+
+      <!-- Card 1 -->
+      <div class="gallery-item editorial bg-obsidian-900 rounded-2xl border border-obsidian-700/50 overflow-hidden group hover:border-emeraldGlow-500/50 transition">
+        <div class="relative overflow-hidden aspect-[4/5] bg-obsidian-950 flex items-center justify-center">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800" alt="Martin Coding Focus" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90 group-hover:opacity-100">
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-transparent opacity-80"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-left">
+            <span class="text-[10px] font-mono text-emeraldGlow-400 bg-emeraldGlow-500/10 border border-emeraldGlow-500/20 px-2 py-0.5 rounded">DEVELOPER MODE</span>
+            <h3 class="text-base font-bold text-white mt-1">Martin's Code Focus</h3>
+          </div>
+        </div>
+        <div class="p-4 text-xs text-zinc-400 space-y-2">
+          <p class="leading-relaxed">Coding clean web apps with lethal precision and effortless style. Mga potyong!!</p>
+          <button onclick="openModal('Martin\'s Code Focus', 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=1200', 'Captured while writing bug-free Javascript code. Pure focus.')" class="text-emeraldGlow-400 font-mono text-[11px] hover:underline flex items-center gap-1 pt-1">
+            <span>Inspect Metadata</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="gallery-item candid bg-obsidian-900 rounded-2xl border border-obsidian-700/50 overflow-hidden group hover:border-emeraldGlow-500/50 transition">
+        <div class="relative overflow-hidden aspect-[4/5] bg-obsidian-950 flex items-center justify-center">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800" alt="Golden Hour Martin" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90 group-hover:opacity-100">
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-transparent opacity-80"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-left">
+            <span class="text-[10px] font-mono text-emeraldGlow-400 bg-emeraldGlow-500/10 border border-emeraldGlow-500/20 px-2 py-0.5 rounded">CANDID</span>
+            <h3 class="text-base font-bold text-white mt-1">Golden Hour Cordero</h3>
+          </div>
+        </div>
+        <div class="p-4 text-xs text-zinc-400 space-y-2">
+          <p class="leading-relaxed">Sunlight adjusted its wavelength just to illuminate Martin's jawline. Gwapo gwapo!</p>
+          <button onclick="openModal('Golden Hour Cordero', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=1200', 'Zero filters applied. Natural aura output at max capacity.')" class="text-emeraldGlow-400 font-mono text-[11px] hover:underline flex items-center gap-1 pt-1">
+            <span>Inspect Metadata</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="gallery-item redcarpet bg-obsidian-900 rounded-2xl border border-obsidian-700/50 overflow-hidden group hover:border-emeraldGlow-500/50 transition">
+        <div class="relative overflow-hidden aspect-[4/5] bg-obsidian-950 flex items-center justify-center">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800" alt="Main Character Stare" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90 group-hover:opacity-100">
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-transparent opacity-80"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-left">
+            <span class="text-[10px] font-mono text-emeraldGlow-400 bg-emeraldGlow-500/10 border border-emeraldGlow-500/20 px-2 py-0.5 rounded">MAIN CHARACTER</span>
+            <h3 class="text-base font-bold text-white mt-1">The Cordero Presence</h3>
+          </div>
+        </div>
+        <div class="p-4 text-xs text-zinc-400 space-y-2">
+          <p class="leading-relaxed">Walking past cameras so fast they had to upgrade lens shutter speeds. Mga potyong!!</p>
+          <button onclick="openModal('The Cordero Presence', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1200', 'Unmatched aesthetic authority. Studio quality on demand.')" class="text-emeraldGlow-400 font-mono text-[11px] hover:underline flex items-center gap-1 pt-1">
+            <span>Inspect Metadata</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 3: EMPIRICAL ANALYTICS HUB -->
+  <section id="analytics" class="glass-card rounded-3xl p-6 sm:p-10 border border-obsidian-700/60 space-y-6">
+    <div class="border-b border-obsidian-700/50 pb-5">
+      <div class="text-xs font-mono text-emeraldGlow-400 uppercase tracking-widest flex items-center gap-2">
+        <i class="fa-solid fa-chart-line"></i> Empirical Gwapo Data
+      </div>
+      <h2 class="text-2xl font-bold text-white mt-1">Cordero Aesthetics Analytics</h2>
+      <p class="text-xs text-zinc-400 mt-1">
+        Comparing Martin Christopher Cordero's performance metrics against standard developers.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <!-- Radar Chart -->
+      <div class="bg-obsidian-950 p-5 rounded-2xl border border-obsidian-700/60 space-y-3">
+        <h3 class="text-xs font-mono text-zinc-300 uppercase flex items-center gap-2">
+          <i class="fa-solid fa-chart-pie text-emeraldGlow-400"></i> Martin vs Global Average Developer
+        </h3>
+        <div class="chart-container">
+          <canvas id="handsomenessRadar"></canvas>
+        </div>
+      </div>
+
+      <!-- Bar Chart -->
+      <div class="bg-obsidian-950 p-5 rounded-2xl border border-obsidian-700/60 space-y-3">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xs font-mono text-zinc-300 uppercase flex items-center gap-2">
+            <i class="fa-solid fa-bolt text-emeraldGlow-400"></i> Daily Aura Output (In Thousands)
+          </h3>
+          <span class="text-[10px] font-mono text-emeraldGlow-400 bg-emeraldGlow-500/10 border border-emeraldGlow-500/20 px-2 py-0.5 rounded">GWAPO GWAPO</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="auraBarChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: POTYONG AFFIRMATIONS & COMPLIMENT ENGINE -->
+  <section id="affirmations" class="glass-card rounded-3xl p-8 sm:p-12 border border-emeraldGlow-500/30 text-center space-y-6 relative overflow-hidden">
+    <div class="max-w-2xl mx-auto space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-emeraldGlow-500/10 border border-emeraldGlow-500/30 text-emeraldGlow-400 rounded-full text-xs font-mono uppercase tracking-widest">
+        <i class="fa-solid fa-quote-left"></i> Praise Engine
+      </div>
+      <h2 class="text-3xl font-extrabold text-white">Mga Potyong Affirmation Engine</h2>
+      <p class="text-xs text-zinc-400">
+        Need a reminder of Martin Christopher Cordero's supreme coding and gwapo status? Click below!
+      </p>
+
+      <!-- Dynamic Compliment Container -->
+      <div class="p-6 sm:p-8 bg-obsidian-950/90 border border-emeraldGlow-500/40 rounded-2xl min-h-[130px] flex items-center justify-center relative shadow-xl">
+        <p id="complimentDisplay" class="text-base sm:text-lg font-medium text-emeraldGlow-200 italic leading-relaxed">
+          "Mga potyong!! Coding ni Martin Christopher Cordero gwapo gwapo—the compiler itself refactors code out of sheer respect!"
+        </p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-3 pt-2 font-mono">
+        <button onclick="generatePotyongAffirmation()" class="bg-emeraldGlow-500 hover:bg-emeraldGlow-400 text-black font-semibold text-xs px-6 py-3 rounded-xl transition shadow-lg shadow-emeraldGlow-500/10 flex items-center gap-2">
+          <i class="fa-solid fa-dice text-sm"></i> Generate Affirmation
+        </button>
+        <button onclick="copyAffirmation()" class="bg-obsidian-800 hover:bg-obsidian-700 text-zinc-300 border border-obsidian-700 font-semibold text-xs px-5 py-3 rounded-xl transition flex items-center gap-2">
+          <i class="fa-solid fa-copy text-xs"></i> Copy text
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: MINIMAL FAQ ACCORDION -->
+  <section id="faq" class="glass-card rounded-3xl p-6 sm:p-10 border border-obsidian-700/60 space-y-6">
+    <div class="border-b border-obsidian-700/50 pb-5">
+      <div class="text-xs font-mono text-emeraldGlow-400 uppercase tracking-widest flex items-center gap-2">
+        <i class="fa-solid fa-circle-question"></i> Inquiry & Knowledge Base
+      </div>
+      <h2 class="text-2xl font-bold text-white mt-1">Frequently Asked Questions</h2>
+      <p class="text-xs text-zinc-400 mt-1">
+        Addressing common queries regarding Martin Christopher Cordero's coding and handsomeness.
+      </p>
+    </div>
+
+    <div class="space-y-4 font-sans">
+      <div class="bg-obsidian-900/60 p-5 rounded-2xl border border-obsidian-700/40 space-y-2">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-angle-right text-emeraldGlow-400 text-xs"></i> Sino si Martin Christopher Cordero?
+        </h3>
+        <p class="text-xs text-zinc-400 leading-relaxed pl-5">
+          Si Martin Christopher Cordero ay certified gwapo gwapo and elite web developer. Master of coding, clean aesthetics, and unmatched charisma. Mga potyong!!
+        </p>
+      </div>
+
+      <div class="bg-obsidian-900/60 p-5 rounded-2xl border border-obsidian-700/40 space-y-2">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-angle-right text-emeraldGlow-400 text-xs"></i> Why is this site called "Coding ni Martin Christopher Cordero Gwapo Gwapo"?
+        </h3>
+        <p class="text-xs text-zinc-400 leading-relaxed pl-5">
+          Because it captures the dual threat: world-class web development skill combined with legendary handsomeness.
+        </p>
+      </div>
+
+      <div class="bg-obsidian-900/60 p-5 rounded-2xl border border-obsidian-700/40 space-y-2">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-angle-right text-emeraldGlow-400 text-xs"></i> What happens when you say "Mga potyong!!"?
+        </h3>
+        <p class="text-xs text-zinc-400 leading-relaxed pl-5">
+          Whenever "Mga potyong!!" is spoken, the surrounding aura increases by 50% and local code automatically fixes syntax errors.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Modal Image Preview Overlay -->
+<div id="imageModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+  <div class="bg-obsidian-900 border border-obsidian-700 rounded-3xl max-w-xl w-full p-6 space-y-4 relative">
+    <button onclick="closeModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-white text-lg w-8 h-8 rounded-full bg-obsidian-800 flex items-center justify-center">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <h3 id="modalTitle" class="text-lg font-bold text-white">Martin Photo Breakdown</h3>
+    <div class="aspect-[4/3] rounded-xl overflow-hidden bg-obsidian-950">
+      <img id="modalImg" src="" alt="Preview" class="w-full h-full object-cover">
+    </div>
+    <p id="modalDesc" class="text-xs text-zinc-400 leading-relaxed font-mono"></p>
+  </div>
+</div>
+
+<!-- Minimalist Footer -->
+<footer class="bg-obsidian-950 border-t border-obsidian-700/50 py-8 text-center text-xs text-zinc-500 font-mono">
+  <div class="max-w-7xl mx-auto px-4 space-y-2">
+    <p class="text-zinc-400 font-medium">Coding ni Martin Christopher Cordero • Gwapo Gwapo Archive</p>
+    <p>Designed and built to celebrate unmatched aesthetic & coding supremacy. Mga potyong!!</p>
+  </div>
+</footer>
+
+<!-- Logic Script -->
+<script>
+  const potyongCompliments = [
+    "Mga potyong!! Coding ni Martin Christopher Cordero gwapo gwapo—the compiler itself refactors code out of sheer respect!",
+    "Mga potyong!! Martin's jawline is so sharp it can slice through memory leaks without a garbage collector.",
+    "Mga potyong!! Cameras don't capture Martin; they render his aura in 8K resolution.",
+    "Mga potyong!! If handsomeness and coding skill were crimes, Martin Christopher Cordero would be serving consecutive lifetime sentences.",
+    "Mga potyong!! Martin's code compiles on the first try every single time because bugs are afraid of his aesthetic power.",
+    "Mga potyong!! Martin's smile has officially been classified as an auxiliary solar power generator.",
+    "Mga potyong!! Senior developers take notes when Martin Christopher Cordero walks into the code review.",
+    "Mga potyong!! Certified 100% Gwapo Gwapo in every country, server, and dimension!"
+  ];
+
+  let auraPoints = 999999;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initRadarChart();
+    initBarChart();
+  });
+
+  function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function triggerAdmiration() {
+    auraPoints += 5000;
+    document.getElementById('auraCount').innerText = auraPoints.toLocaleString() + '+';
+
+    if (typeof confetti === 'function') {
+      confetti({
+        particleCount: 40,
+        spread: 70,
+        origin: { y: 0.8 },
+        colors: ['#34d399', '#059669', '#ffffff']
+      });
+    }
+  }
+
+  function generatePotyongAffirmation() {
+    const idx = Math.floor(Math.random() * potyongCompliments.length);
+    const elem = document.getElementById('complimentDisplay');
+    elem.style.opacity = '0';
+
+    setTimeout(() => {
+      elem.innerText = potyongCompliments[idx];
+      elem.style.opacity = '1';
+    }, 200);
+
+    if (typeof confetti === 'function') {
+      confetti({
+        particleCount: 30,
+        spread: 60,
+        origin: { y: 0.6 },
+        colors: ['#34d399', '#a7f3d0']
+      });
+    }
+  }
+
+  function copyAffirmation() {
+    const text = document.getElementById('complimentDisplay').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      alert('Copied to clipboard! Coding ni Martin Christopher Cordero Gwapo Gwapo! Mga potyong!!');
+    });
+  }
+
+  function filterGallery(category) {
+    const items = document.querySelectorAll('.gallery-item');
+    const btns = document.querySelectorAll('.filter-btn');
+
+    btns.forEach(btn => {
+      btn.classList.remove('bg-emeraldGlow-500', 'text-black', 'font-bold');
+      btn.classList.add('bg-obsidian-800', 'text-zinc-400');
+    });
+
+    event.target.classList.remove('bg-obsidian-800', 'text-zinc-400');
+    event.target.classList.add('bg-emeraldGlow-500', 'text-black', 'font-bold');
+
+    items.forEach(item => {
+      if (category === 'all' || item.classList.contains(category)) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  function openModal(title, imgUrl, desc) {
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalImg').src = imgUrl;
+    document.getElementById('modalDesc').innerText = desc;
+    document.getElementById('imageModal').classList.remove('hidden');
+  }
+
+  function closeModal() {
+    document.getElementById('imageModal').classList.add('hidden');
+  }
+
+  function runBiometricScan() {
+    const btn = document.getElementById('scanBtn');
+    const line = document.getElementById('laserScanLine');
+    const status = document.getElementById('scanStatus');
+    const verdict = document.getElementById('verdictText');
+
+    btn.disabled = true;
+    btn.classList.add('opacity-50');
+    line.classList.remove('hidden');
+    status.innerText = "SCANNING MARTIN...";
+
+    setTimeout(() => {
+      line.classList.add('hidden');
+      status.innerText = "GWAPO GWAPO 100%";
+      btn.disabled = false;
+      btn.classList.remove('opacity-50');
+
+      document.getElementById('jawVal').innerText = '100.0%';
+      document.getElementById('jawBar').style.width = '100%';
+
+      verdict.innerText = `Scan verified for Martin Christopher Cordero at ${new Date().toLocaleTimeString()}. Gwapo rating confirmed at absolute max (100%). Mga potyong!!`;
+
+      triggerAdmiration();
+    }, 2000);
+  }
+
+  function initRadarChart() {
+    const ctx = document.getElementById('handsomenessRadar').getContext('2d');
+    new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['Coding Mastery', 'Jawline Precision', 'Eye Magnetism', 'Style Game', 'Charisma', 'Aura Output'],
+        datasets: [
+          {
+            label: 'Martin Christopher Cordero',
+            data: [100, 100, 100, 99, 100, 100],
+            backgroundColor: 'rgba(52, 211, 153, 0.25)',
+            borderColor: '#34d399',
+            pointBackgroundColor: '#34d399',
+            borderWidth: 2
+          },
+          {
+            label: 'Average Developer',
+            data: [45, 48, 50, 42, 49, 40],
+            backgroundColor: 'rgba(113, 113, 122, 0.1)',
+            borderColor: '#52525b',
+            pointBackgroundColor: '#52525b',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { color: '#a1a1aa', font: { size: 10 } } }
+        },
+        scales: {
+          r: {
+            angleLines: { color: '#27272a' },
+            grid: { color: '#27272a' },
+            pointLabels: { color: '#34d399', font: { size: 10, weight: 'bold' } },
+            ticks: { display: false },
+            suggestedMin: 0,
+            suggestedMax: 100
+          }
+        }
+      }
+    });
+  }
+
+  function initBarChart() {
+    const ctx = document.getElementById('auraBarChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Morning Code', 'Midday Peak', 'Golden Hour', 'Evening Build', 'Midnight Hack'],
+        datasets: [{
+          label: 'Martin Aura (Thousands)',
+          data: [95, 98, 100, 99, 97],
+          backgroundColor: '#34d399',
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: { color: '#27272a' },
+            ticks: { color: '#71717a' }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { color: '#71717a', font: { size: 10 } }
+          }
+        }
+      }
+    });
+  }
+</script>
+</body>
+</html>
